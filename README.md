@@ -1,7 +1,7 @@
-# InvSee Plugin
+# Extras Plugin
 
 ## Overview
-The **InvSee Plugin** allows players to view and edit the inventories of other players in-game, with added support for multiple viewers and editing of the **armor** and **offhand** slots. It is designed to provide server administrators, moderators, or trusted players the ability to manage inventories efficiently.
+The **Extras Plugin** allows players to view and edit the inventories of other players in-game, with added support for multiple viewers and editing of the **armor** and **offhand** slots. It is designed to provide server administrators, moderators, or trusted players the ability to manage inventories efficiently.
 
 ## Features
 - **Multiple Viewers:** Allow multiple users to view and interact with a player's inventory at the same time.
