@@ -31,7 +31,6 @@ public class InvSeeCommand implements CommandExecutor {
         Player targetOnline = Bukkit.getPlayer(args[0]);
         OfflinePlayer target;
         if (targetOnline == null) {
-            // If the target is offline, get the OfflinePlayer.
             target = Bukkit.getOfflinePlayer(args[0]);
             if (target == null || !target.hasPlayedBefore()) {
                 executor.sendMessage("Player not found.");
@@ -45,10 +44,7 @@ public class InvSeeCommand implements CommandExecutor {
             executor.sendMessage("You cannot view your own inventory.");
             return true;
         }
-        // Create or retrieve a session for the target.
         InventorySession session = InventorySessionManager.getOrCreateSession(target);
-
-        // Add the executor as an observer.
         session.addObserver(executor);
         return true;
     }

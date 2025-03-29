@@ -24,8 +24,6 @@ public class PlayerInventoryChangeListener implements Listener {
         Player player = event.getPlayer();
         InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
         if (session == null) return;
-
-        // Sync player to GUI when block is broken
         Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
     }
 
@@ -34,21 +32,15 @@ public class PlayerInventoryChangeListener implements Listener {
         Player player = event.getPlayer();
         InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
         if (session == null) return;
-
-        // Sync player to GUI when block is placed
         Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
     }
 
     @EventHandler
     public void onBlockInteract(PlayerInteractEvent event) {
-        // Ensure that it's not a physical interaction (like walking on pressure plates)
         Player player = event.getPlayer();
         if (event.getAction() == Action.PHYSICAL) return;
-
         InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
         if (session == null) return;
-
-        // Sync player to GUI when interacting with blocks (e.g., fishing, shoveling, etc.)
         Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
     }
 
@@ -57,8 +49,6 @@ public class PlayerInventoryChangeListener implements Listener {
         Player player = event.getPlayer();
         InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
         if (session == null) return;
-
-        // Sync player to GUI when an item’s durability is used (e.g., tools or weapons)
         Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
     }
 
@@ -69,7 +59,6 @@ public class PlayerInventoryChangeListener implements Listener {
         InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
         if (session == null) return;
 
-        // Sync player to GUI when player eats an item
         Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
     }
 
@@ -78,8 +67,6 @@ public class PlayerInventoryChangeListener implements Listener {
         Player player = event.getEnchanter();
         InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
         if (session == null) return;
-
-        // Sync after enchanting an item
         Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
     }
 

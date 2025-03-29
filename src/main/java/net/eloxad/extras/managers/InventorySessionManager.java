@@ -9,10 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class InventorySessionManager {
-    // Map target UUID to InventorySession
     private static final Map<UUID, InventorySession> sessions = new HashMap<>();
-
-    // Get or create a session for the given target.
     public static InventorySession getOrCreateSession(OfflinePlayer target) {
         UUID targetId = target.getUniqueId();
         InventorySession session = sessions.get(targetId);

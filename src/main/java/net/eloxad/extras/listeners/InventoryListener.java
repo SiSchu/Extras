@@ -87,7 +87,7 @@ public class InventoryListener implements Listener {
         }
         InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
         if (session != null && clickedInventory instanceof PlayerInventory) {
-            event.setCancelled(false); // Allow normal edits
+            event.setCancelled(false);
             Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
         }
     }
@@ -96,11 +96,9 @@ public class InventoryListener implements Listener {
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
-        System.out.println("drag");
         Inventory topInventory = player.getOpenInventory().getTopInventory();
         InventoryHolder topHolder = topInventory.getHolder();
 
-        // If the observer clicked inside the GUI
         if (topHolder instanceof CustomGUIHolder customHolder) {
             if (!customHolder.getId().startsWith("player_inventory_")) return;
 
@@ -117,7 +115,6 @@ public class InventoryListener implements Listener {
 
             boolean isTarget = player.getUniqueId().equals(session.getTargetId());
 
-            // Sync logic
             if (isTarget) {
                 event.setCancelled(false);
                 Bukkit.getScheduler().runTaskLater(Extras.getInstance(), session::syncTargetToGUI, 1L);
@@ -128,7 +125,6 @@ public class InventoryListener implements Listener {
             return;
         }
 
-        // If the player is clicking their own inventory (not as an observer)
         UUID targetId = player.getUniqueId();
         InventorySession session = InventorySessionManager.getSession(targetId);
         if (session != null) {
