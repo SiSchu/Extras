@@ -55,7 +55,6 @@ public class PlayerInventoryChangeListener implements Listener {
     @EventHandler
     public void onPlayerEat(PlayerItemConsumeEvent event) {
         Player player = event.getPlayer();
-
         InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
         if (session == null) return;
 
