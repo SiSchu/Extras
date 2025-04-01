@@ -10,15 +10,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 
-public class RainbowArmorHelmet extends CustomItem {
-    public RainbowArmorHelmet() {
-        super("rainbow_helmet", createItem(), "Regenbogen Helm");
+public class RainbowArmorBoots extends CustomItem {
+    public RainbowArmorBoots() {
+        super("rainbow_boots", createItem(), "Regenbogen Schuhe");
     }
 
     public static ItemStack createItem() {
-        ItemStack item = new ItemStack(Material.LEATHER_HELMET);
+        ItemStack item = new ItemStack(Material.LEATHER_BOOTS);
         ItemMeta meta = item.getItemMeta();
-        Component name = LegacyComponentSerializer.legacyAmpersand().deserialize("&cR&6e&eg&ae&3n&9b&5o&cg&6e&en &3H&9e&5l&cm");
+        Component name = LegacyComponentSerializer.legacyAmpersand().deserialize("&cR&6e&eg&ae&3n&9b&5o&cg&6e&en &3S&9c&5h&cu&6h&ee");
         meta.displayName(name.decoration(TextDecoration.ITALIC, false).decoration(TextDecoration.BOLD, true));
         meta.setEnchantmentGlintOverride(true);
         PersistentDataContainer container = meta.getPersistentDataContainer();

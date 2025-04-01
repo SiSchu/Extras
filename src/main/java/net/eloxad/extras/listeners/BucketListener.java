@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerBucketFillEvent;
 
 public class BucketListener implements Listener {
     private final CustomItemManager customItemManager;
+
     @Inject
     public BucketListener(CustomItemManager customItemManager) {
         this.customItemManager = customItemManager;
@@ -16,12 +17,11 @@ public class BucketListener implements Listener {
 
     @EventHandler
     public void onBucketEmpty(PlayerBucketEmptyEvent event) {
-        customItemManager.handle(event, event.getPlayer().getEquipment().getItem(event.getHand()));
+        this.customItemManager.handle(event, event.getPlayer().getEquipment().getItem(event.getHand()));
     }
 
     @EventHandler
     public void onBucketFill(PlayerBucketFillEvent event) {
-        customItemManager.handle(event, event.getPlayer().getEquipment().getItem(event.getHand()));
+        this.customItemManager.handle(event, event.getPlayer().getEquipment().getItem(event.getHand()));
     }
-
 }

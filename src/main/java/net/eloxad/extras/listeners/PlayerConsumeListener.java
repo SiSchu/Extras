@@ -8,13 +8,14 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 
 public class PlayerConsumeListener implements Listener {
     private final CustomItemManager customItemManager;
+
     @Inject
     public PlayerConsumeListener(CustomItemManager customItemManager) {
         this.customItemManager = customItemManager;
     }
+
     @EventHandler
     public void onPlayerConsume(PlayerItemConsumeEvent event) {
-        customItemManager.handle(event, event.getItem());
+        this.customItemManager.handle(event, event.getItem());
     }
-
 }

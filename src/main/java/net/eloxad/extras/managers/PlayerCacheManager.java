@@ -12,13 +12,12 @@ public class PlayerCacheManager {
 
     private final Map<UUID, Map<String, Object>> cache = new ConcurrentHashMap<>();
 
-    // Store any object using a String key
+
     public <T> void setValue(UUID uuid, String key, T value) {
         cache.computeIfAbsent(uuid, k -> new ConcurrentHashMap<>()).put(key, value);
     }
 
-    // Retrieve stored value and cast it to the expected type
-    @SuppressWarnings("unchecked")
+
     public <T> T getValue(UUID uuid, String key, Class<T> type) {
         Map<String, Object> playerData = cache.get(uuid);
         if (playerData != null) {
@@ -30,7 +29,6 @@ public class PlayerCacheManager {
         return null;
     }
 
-    // Remove a specific value
     public void removeValue(UUID uuid, String key) {
         Map<String, Object> playerData = cache.get(uuid);
         if (playerData != null) {
@@ -41,12 +39,11 @@ public class PlayerCacheManager {
         }
     }
 
-    // Check if a value exists for a given key
     public boolean hasValue(UUID uuid, String key) {
         return cache.containsKey(uuid) && cache.get(uuid).containsKey(key);
     }
 
-    // Remove all data for a player
+
     public void removePlayer(UUID uuid) {
         cache.remove(uuid);
     }

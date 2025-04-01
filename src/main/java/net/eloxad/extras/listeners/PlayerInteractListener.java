@@ -9,9 +9,12 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class PlayerInteractListener implements Listener {
     @Inject
     private CustomItemManager customItemManager;
-    @EventHandler
-    public void onInteract(PlayerInteractEvent e) {
-        customItemManager.handle(e, e.getItem());
+
+    public PlayerInteractListener() {
     }
 
+    @EventHandler
+    public void onInteract(PlayerInteractEvent e) {
+        this.customItemManager.handle(e, e.getItem());
+    }
 }

@@ -1,5 +1,6 @@
 package net.eloxad.extras.listeners;
 
+import java.util.Objects;
 import net.eloxad.extras.Extras;
 import net.eloxad.extras.managers.InventorySessionManager;
 import net.eloxad.extras.utils.InventorySession;
@@ -15,58 +16,66 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
+import org.bukkit.scheduler.BukkitScheduler;
 
 public class PlayerInventoryChangeListener implements Listener {
-
+    public PlayerInventoryChangeListener() {
+    }
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
         InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
-        if (session == null) return;
-        Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
+        if (session != null) {
+            Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
+        }
     }
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
-        if (session == null) return;
-        Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
+        if (session != null) {
+            Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
+        }
     }
 
     @EventHandler
     public void onBlockInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (event.getAction() == Action.PHYSICAL) return;
-        InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
-        if (session == null) return;
-        Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
+        if (event.getAction() != Action.PHYSICAL) {
+            InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
+            if (session != null) {
+                Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
+            }
+        }
     }
 
     @EventHandler
     public void onItemDurabilityChange(PlayerItemDamageEvent event) {
         Player player = event.getPlayer();
         InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
-        if (session == null) return;
-        Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
+        if (session != null) {
+            Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
+        }
     }
 
     @EventHandler
     public void onPlayerEat(PlayerItemConsumeEvent event) {
         Player player = event.getPlayer();
         InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
-        if (session == null) return;
-
-        Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
+        if (session != null) {
+            Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
+        }
     }
 
     @EventHandler
     public void onEnchantItem(EnchantItemEvent event) {
         Player player = event.getEnchanter();
         InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
-        if (session == null) return;
-        Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
+        if (session != null) {
+            Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
+        }
     }
 
     @EventHandler
@@ -74,11 +83,12 @@ public class PlayerInventoryChangeListener implements Listener {
         if (event.getMessage().startsWith("/give")) {
             Player player = event.getPlayer();
             InventorySession session = InventorySessionManager.getSession(player.getUniqueId());
-            if (session == null) return;
+            if (session == null) {
+                return;
+            }
+
             Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
         }
+
     }
-
 }
-
-
