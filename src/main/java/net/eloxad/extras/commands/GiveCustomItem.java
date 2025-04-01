@@ -29,17 +29,15 @@ public class GiveCustomItem implements CommandExecutor, TabCompleter {
                 player.sendRichMessage("<red>Item not found!");
                 return true;
             }
-
-            player.give(new ItemStack[]{item});
         }
 
         return true;
     }
 
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-        List<String> items = new ArrayList(this.customItemManager.getCustomItems().stream().map(CustomItem::getId).toList());
+        List<String> items = customItemManager.getCustomItems().stream().map(CustomItem::getId).toList();
         String id = args[0];
-        List<String> var7 = StringCheck.getStringStartsWith(id, (String[])items.toArray((x$0) -> new String[x$0]));
-        return var7;
+        items = StringCheck.getStringStartsWith(id, items.toArray(String[]::new));
+        return items;
     }
 }

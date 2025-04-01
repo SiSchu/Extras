@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import net.eloxad.extras.utils.CustomItem;
 import net.eloxad.extras.utils.LoreFormatter;
 import net.eloxad.extras.utils.PDCHandler;
@@ -37,13 +38,19 @@ public class MultiBucket extends CustomItem {
     private static ItemStack createItem() {
         ItemStack item = new ItemStack(Material.BUCKET);
         ItemMeta meta = item.getItemMeta();
-        meta.displayName(((TextComponent)((TextComponent)Component.text("Multi Eimer").color(NamedTextColor.GOLD)).decoration(TextDecoration.ITALIC, false)).decoration(TextDecoration.BOLD, true));
+        meta.displayName(((TextComponent) ((TextComponent) Component.text("Multi Eimer").color(NamedTextColor.GOLD)).decoration(TextDecoration.ITALIC, false)).decoration(TextDecoration.BOLD, true));
         List<TextComponent> lore = new ArrayList();
         lore.add(Component.empty());
-        lore.add((TextComponent)((TextComponent)((TextComponent)((TextComponent)((TextComponent)Component.text("Dieser Eimer ist unendlich und kann zwischen ", NamedTextColor.YELLOW).decoration(TextDecoration.ITALIC, false)).append(Component.text("Leer", NamedTextColor.WHITE).decoration(TextDecoration.ITALIC, false))).append(Component.text("Wasser", NamedTextColor.BLUE).decoration(TextDecoration.ITALIC, false))).append(Component.text("Lava", TextColor.color(254, 67, 42)).decoration(TextDecoration.ITALIC, false))).append(Component.text("wechseln.", NamedTextColor.YELLOW).decoration(TextDecoration.ITALIC, false)));
+        lore.add(
+                Component.text("Dieser Eimer ist unendlich und kann zwischen ", NamedTextColor.YELLOW).decoration(TextDecoration.ITALIC, false)
+                        .append(Component.text("Leer", NamedTextColor.WHITE).decoration(TextDecoration.ITALIC, false))
+                        .append(Component.text("Wasser", NamedTextColor.BLUE).decoration(TextDecoration.ITALIC, false))
+                        .append(Component.text("Lava", TextColor.color(254, 67, 42)).decoration(TextDecoration.ITALIC, false))
+                        .append(Component.text("wechseln.", NamedTextColor.YELLOW).decoration(TextDecoration.ITALIC, false))
+        );
         lore = LoreFormatter.formatLore(40, lore);
-        lore.add((TextComponent)((TextComponent)Component.text("Modus ändern: ", NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false)).append(Component.text("Sneak + Linksklick", NamedTextColor.GREEN).decoration(TextDecoration.ITALIC, false)));
-        lore.add((TextComponent)((TextComponent)Component.text("Aktueller Modus: ", NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false)).append(Component.text("Leer", NamedTextColor.WHITE).decoration(TextDecoration.ITALIC, false)));
+        lore.add(Component.text("Modus ändern: ", NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false).append(Component.text("Sneak + Linksklick", NamedTextColor.GREEN).decoration(TextDecoration.ITALIC, false)));
+        lore.add(Component.text("Aktueller Modus: ", NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false).append(Component.text("Leer", NamedTextColor.WHITE).decoration(TextDecoration.ITALIC, false)));
         meta.lore(lore);
         PersistentDataContainer container = meta.getPersistentDataContainer();
         PDCHandler.set(container, "state", "empty");
@@ -61,7 +68,7 @@ public class MultiBucket extends CustomItem {
                 this.isClicking.put(player, currentTime - 1000L);
             }
 
-            long lastTime = (Long)this.isClicking.get(player);
+            long lastTime = (Long) this.isClicking.get(player);
             if (currentTime - lastTime < 1000L) {
                 this.isClicking.put(player, currentTime);
                 return;
@@ -73,12 +80,12 @@ public class MultiBucket extends CustomItem {
             String[] names = new String[]{"Leer", "Wasser", "Lava"};
             TextColor[] colors = new TextColor[]{NamedTextColor.WHITE, NamedTextColor.BLUE, TextColor.color(254, 67, 42)};
             PersistentDataContainer container = meta.getPersistentDataContainer();
-            String state = (String)PDCHandler.get(container, "state");
+            String state = (String) PDCHandler.get(container, "state");
             int index = Arrays.asList(states).indexOf(state);
             index = (index + 1) % 3;
             PDCHandler.set(container, "state", states[index]);
             List<Component> lore = meta.lore();
-            lore.set(lore.size() - 1, ((TextComponent)Component.text("Aktueller Modus: ", NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false)).append(Component.text(names[index], colors[index]).decoration(TextDecoration.ITALIC, false)));
+            lore.set(lore.size() - 1, ((TextComponent) Component.text("Aktueller Modus: ", NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false)).append(Component.text(names[index], colors[index]).decoration(TextDecoration.ITALIC, false)));
             meta.lore(lore);
             if (index == 0) {
                 item = item.withType(Material.BUCKET);

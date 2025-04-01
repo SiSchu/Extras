@@ -22,7 +22,7 @@ public class InfinityBeef extends CustomItem {
     private static ItemStack createItem() {
         ItemStack item = new ItemStack(Material.COOKED_BEEF);
         ItemMeta meta = item.getItemMeta();
-        meta.displayName(((TextComponent)((TextComponent)Component.text("Unendliches Steak").color(NamedTextColor.GOLD)).decoration(TextDecoration.ITALIC, false)).decoration(TextDecoration.BOLD, true));
+        meta.displayName(Component.text("Unendliches Steak").color(NamedTextColor.GOLD).decoration(TextDecoration.ITALIC, false).decoration(TextDecoration.BOLD, true));
         List<Component> lore = new ArrayList();
         lore.add(Component.empty());
         lore.add(Component.text("Dieses Steak ist unendlich", NamedTextColor.YELLOW).decoration(TextDecoration.ITALIC, false));

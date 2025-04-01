@@ -26,14 +26,14 @@ public class GlassCutter extends CustomItem {
     public static ItemStack createItem() {
         ItemStack item = new ItemStack(Material.SHEARS);
         ItemMeta meta = item.getItemMeta();
-        meta.displayName(((TextComponent)((TextComponent)Component.text("Glasschneider").color(NamedTextColor.GOLD)).decoration(TextDecoration.ITALIC, false)).decoration(TextDecoration.BOLD, true));
+        meta.displayName(Component.text("Glasschneider").color(NamedTextColor.GOLD).decoration(TextDecoration.ITALIC, false).decoration(TextDecoration.BOLD, true));
         List<Component> lore = new ArrayList();
         lore.add(Component.empty());
         lore.add(Component.text("Droppt Glas beim Abbauen", NamedTextColor.YELLOW).decoration(TextDecoration.ITALIC, false));
         meta.lore(lore);
         meta.setEnchantmentGlintOverride(true);
         meta.setUnbreakable(true);
-        meta.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS});
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addEnchant(Enchantment.EFFICIENCY, 15, true);
         item.setItemMeta(meta);
         return item;

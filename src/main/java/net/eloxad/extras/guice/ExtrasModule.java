@@ -16,7 +16,6 @@ public class ExtrasModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        // Here you can bind classes
         bind(CustomItemManager.class).toInstance(new CustomItemManager());
     }
 

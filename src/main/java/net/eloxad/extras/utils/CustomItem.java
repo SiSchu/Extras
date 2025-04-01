@@ -32,16 +32,12 @@ public abstract class CustomItem {
         setCustomID(item, id);
     }
 
-    /**
-     * Registers an event handler for a specific event type.
-     */
+
     protected <T extends Event> void registerEvent(Class<T> eventClass, Consumer<T> handler) {
         eventHandlers.put(eventClass, handler);
     }
 
-    /**
-     * Called by the manager to process an event.
-     */
+
     public void handleEvent(Event event, ItemStack usedItem) {
         if (!matchesItem(usedItem)) return;
         @SuppressWarnings("unchecked")
@@ -51,9 +47,6 @@ public abstract class CustomItem {
         }
     }
 
-    /**
-     * Checks whether the provided ItemStack is this custom item by using the PersistentDataContainer.
-     */
     public boolean matchesItem(ItemStack other) {
         if (other == null || !other.hasItemMeta()) return false;
         ItemMeta meta = other.getItemMeta();
@@ -63,9 +56,7 @@ public abstract class CustomItem {
         return id.equals(storedId);
     }
 
-    /**
-     * Sets the custom ID in the item's PersistentDataContainer.
-     */
+
     private void setCustomID(ItemStack item, String id) {
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {

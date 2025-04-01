@@ -22,12 +22,12 @@ public class InfinityCookie extends CustomItem {
     private static ItemStack createItem() {
         ItemStack item = new ItemStack(Material.COOKIE);
         ItemMeta meta = item.getItemMeta();
-        meta.displayName(((TextComponent)((TextComponent)Component.text("Unendlicher Cookie").color(NamedTextColor.GOLD)).decoration(TextDecoration.ITALIC, false)).decoration(TextDecoration.BOLD, true));
+        meta.displayName(Component.text("Unendlicher Cookie").color(NamedTextColor.GOLD).decoration(TextDecoration.ITALIC, false).decoration(TextDecoration.BOLD, true));
         List<Component> lore = new ArrayList();
         lore.add(Component.empty());
         lore.add(Component.text("Dieser Cookie ist unendlich", NamedTextColor.YELLOW).decoration(TextDecoration.ITALIC, false));
         lore.add(Component.empty());
-        lore.add(((TextComponent)Component.text("Mit viel Liebe gebacken von: ", NamedTextColor.RED).decoration(TextDecoration.ITALIC, false)).append(Component.text("xXItzSiSchuXx", NamedTextColor.AQUA).decoration(TextDecoration.ITALIC, false)));
+        lore.add(Component.text("Mit viel Liebe gebacken von: ", NamedTextColor.RED).decoration(TextDecoration.ITALIC, false).append(Component.text("xXItzSiSchuXx", NamedTextColor.AQUA).decoration(TextDecoration.ITALIC, false)));
         meta.lore(lore);
         meta.setEnchantmentGlintOverride(true);
         item.setItemMeta(meta);
