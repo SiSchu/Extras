@@ -23,7 +23,7 @@ public class InfinityCookie extends CustomItem {
         ItemStack item = new ItemStack(Material.COOKIE);
         ItemMeta meta = item.getItemMeta();
         meta.displayName(Component.text("Unendlicher Cookie").color(NamedTextColor.GOLD).decoration(TextDecoration.ITALIC, false).decoration(TextDecoration.BOLD, true));
-        List<Component> lore = new ArrayList();
+        List<Component> lore = new ArrayList<>();
         lore.add(Component.empty());
         lore.add(Component.text("Dieser Cookie ist unendlich", NamedTextColor.YELLOW).decoration(TextDecoration.ITALIC, false));
         lore.add(Component.empty());

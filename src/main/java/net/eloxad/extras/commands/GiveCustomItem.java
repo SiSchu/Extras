@@ -24,10 +24,18 @@ public class GiveCustomItem implements CommandExecutor, TabCompleter {
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         if (sender instanceof Player player) {
-            ItemStack item = this.customItemManager.getItem(args[0]).getItem();
-            if (item == null) {
-                player.sendRichMessage("<red>Item not found!");
-                return true;
+            if(args.length == 1) {
+                ItemStack item = customItemManager.getItem(args[0]).getItem();
+                if (item == null) {
+                    player.sendRichMessage("<red>Item not found!");
+                    return true;
+                }
+                else{
+                    player.getInventory().addItem(item);
+                    return true;
+                }
+            } else {
+                player.sendRichMessage("<red>Usage: /givecustomitem <id>");
             }
         }
 

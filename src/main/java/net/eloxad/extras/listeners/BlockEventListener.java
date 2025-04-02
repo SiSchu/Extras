@@ -5,13 +5,14 @@ import net.eloxad.extras.managers.CustomItemManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockDropItemEvent;
 
-public class BlockBreakListener implements Listener {
+public class BlockEventListener implements Listener {
     private final CustomItemManager customItemManager;
 
     @Inject
-    public BlockBreakListener(CustomItemManager customItemManager) {
+    public BlockEventListener(CustomItemManager customItemManager) {
         this.customItemManager = customItemManager;
     }
 
@@ -24,4 +25,10 @@ public class BlockBreakListener implements Listener {
     public void onBlockDropItem(BlockDropItemEvent event) {
         this.customItemManager.handle(event, event.getPlayer().getEquipment().getItemInMainHand());
     }
+
+    @EventHandler
+    public void onBlockDamage(BlockDamageEvent event) {
+        this.customItemManager.handle(event, event.getPlayer().getEquipment().getItemInMainHand());
+    }
+
 }

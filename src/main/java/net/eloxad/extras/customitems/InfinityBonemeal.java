@@ -25,7 +25,7 @@ public class InfinityBonemeal extends CustomItem {
         ItemStack item = new ItemStack(Material.BONE_MEAL);
         ItemMeta meta = item.getItemMeta();
         meta.displayName(Component.text("Unendliches Knochenmehl").color(NamedTextColor.GOLD).decoration(TextDecoration.ITALIC, false).decoration(TextDecoration.BOLD, true));
-        List<Component> lore = new ArrayList();
+        List<Component> lore = new ArrayList<>();
         lore.add(Component.empty());
         lore.add(Component.text("Dieses Knochenmehl verbraucht sich nicht", NamedTextColor.YELLOW).decoration(TextDecoration.ITALIC, false));
         meta.lore(lore);

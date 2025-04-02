@@ -26,7 +26,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 
 public class MultiBucket extends CustomItem {
-    private final Map<Player, Long> isClicking = new HashMap();
+    private final Map<Player, Long> isClicking = new HashMap<>();
 
     public MultiBucket() {
         super("multi_bucket", createItem(), "Multi Eimer");
@@ -38,8 +38,8 @@ public class MultiBucket extends CustomItem {
     private static ItemStack createItem() {
         ItemStack item = new ItemStack(Material.BUCKET);
         ItemMeta meta = item.getItemMeta();
-        meta.displayName(((TextComponent) ((TextComponent) Component.text("Multi Eimer").color(NamedTextColor.GOLD)).decoration(TextDecoration.ITALIC, false)).decoration(TextDecoration.BOLD, true));
-        List<TextComponent> lore = new ArrayList();
+        meta.displayName(Component.text("Multi Eimer").color(NamedTextColor.GOLD).decoration(TextDecoration.ITALIC, false).decoration(TextDecoration.BOLD, true));
+        List<TextComponent> lore = new ArrayList<>();
         lore.add(Component.empty());
         lore.add(
                 Component.text("Dieser Eimer ist unendlich und kann zwischen ", NamedTextColor.YELLOW).decoration(TextDecoration.ITALIC, false)

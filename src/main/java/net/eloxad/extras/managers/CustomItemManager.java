@@ -5,13 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
 import lombok.Generated;
+import lombok.Getter;
+import net.eloxad.extras.utils.CustomGUIHolder;
 import net.eloxad.extras.utils.CustomItem;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 
 @Singleton
 public class CustomItemManager {
-    private final List<CustomItem> customItems = new ArrayList();
+    @Getter
+    private final List<CustomItem> customItems = new ArrayList<>();
+    @Getter
     private static CustomItemManager instance;
 
     public CustomItemManager() {
@@ -29,7 +33,6 @@ public class CustomItemManager {
                 return item;
             }
         }
-
         return null;
     }
 
@@ -43,13 +46,4 @@ public class CustomItemManager {
 
     }
 
-    @Generated
-    public List<CustomItem> getCustomItems() {
-        return this.customItems;
-    }
-
-    @Generated
-    public static CustomItemManager getInstance() {
-        return instance;
-    }
 }

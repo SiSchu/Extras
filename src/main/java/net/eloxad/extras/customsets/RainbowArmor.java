@@ -1,8 +1,11 @@
 package net.eloxad.extras.customsets;
 
 import net.eloxad.extras.Extras;
+
 import org.bukkit.Color;
+import org.bukkit.GameMode;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
@@ -30,31 +33,35 @@ public class RainbowArmor {
                 } else {
                     int rgb = RainbowArmor.ColorUtils.rainbow(this.offset);
 
-                    for(ItemStack item : player.getInventory().getArmorContents()) {
+                    for (ItemStack item : player.getInventory().getArmorContents()) {
                         if (item != null && item.getItemMeta() != null) {
                             ItemMeta meta = item.getItemMeta();
                             PersistentDataContainer container = meta.getPersistentDataContainer();
                             NamespacedKey key = new NamespacedKey(Extras.getNamespace(), "rainbowarmor");
                             if (container.has(key, PersistentDataType.BOOLEAN)) {
-                                LeatherArmorMeta leatherMeta = (LeatherArmorMeta)meta;
+                                LeatherArmorMeta leatherMeta = (LeatherArmorMeta) meta;
                                 leatherMeta.setColor(Color.fromRGB(rgb));
+                                if(player.getGameMode() == GameMode.CREATIVE) {
+                                    Sound sound = Sound.INTENTIONALLY_EMPTY;
+                                    leatherMeta.getEquippable().setEquipSound(sound);
+                                }
+                                else{
+                                    Sound sound = Sound.ITEM_ARMOR_EQUIP_LEATHER;
+                                    leatherMeta.getEquippable().setEquipSound(sound);
+                                }
                                 item.setItemMeta(leatherMeta);
                             }
                         }
                     }
-
-                    this.offset = (this.offset + 10) % 360;
+                    this.offset = (this.offset + 4) % 360;
                 }
             }
         }).runTaskTimerAsynchronously(Extras.getInstance(), 0L, 2L);
     }
 
     private static class ColorUtils {
-        private ColorUtils() {
-        }
-
         static int rainbow(int offset) {
-            float hue = (float)(offset % 360) / 360.0F;
+            float hue = (float) (offset % 360) / 360.0F;
             java.awt.Color awtColor = java.awt.Color.getHSBColor(hue, 1.0F, 1.0F);
             return awtColor.getRed() << 16 | awtColor.getGreen() << 8 | awtColor.getBlue();
         }
