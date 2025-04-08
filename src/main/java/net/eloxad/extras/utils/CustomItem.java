@@ -22,7 +22,7 @@ public abstract class CustomItem {
     private final String itemName;
     private final Map<Class<? extends Event>, Consumer<? extends Event>> eventHandlers = new HashMap<>();
     private final NamespacedKey key;
-
+    private final Map<String, Map<String, Boolean>> options = new HashMap<>();
 
     public CustomItem(String id, ItemStack item, String itemName) {
         this.id = id;
@@ -65,4 +65,30 @@ public abstract class CustomItem {
             item.setItemMeta(meta);
         }
     }
+
+    public boolean getOption(String id, String option) {
+        if(!options.containsKey(id)) return true;
+        return options.get(id).getOrDefault(option, true);
+    }
+
+    public boolean disableRenaming() {
+        options.computeIfAbsent(id, k -> new HashMap<>()).put("renaming", false);
+        return true;
+    }
+
+    public boolean disableEnchanting() {
+        options.computeIfAbsent(id, k -> new HashMap<>()).put("enchanting", false);
+        return true;
+    }
+
+    public boolean disableRepairing() {
+        options.computeIfAbsent(id, k -> new HashMap<>()).put("repairing", false);
+        return true;
+    }
+
+    public boolean disableCraftingUsage() {
+        options.computeIfAbsent(id, k -> new HashMap<>()).put("crafting_usage", false);
+        return true;
+    }
+
 }

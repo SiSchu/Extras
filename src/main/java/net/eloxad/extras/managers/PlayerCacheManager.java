@@ -18,6 +18,7 @@ public class PlayerCacheManager {
     }
 
 
+    @SuppressWarnings("unchecked")
     public <T> T getValue(UUID uuid, String key, Class<T> type) {
         Map<String, Object> playerData = cache.get(uuid);
         if (playerData != null) {

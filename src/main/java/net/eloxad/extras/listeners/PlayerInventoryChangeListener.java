@@ -2,6 +2,7 @@ package net.eloxad.extras.listeners;
 
 import java.util.Objects;
 import net.eloxad.extras.Extras;
+import net.eloxad.extras.managers.CustomItemManager;
 import net.eloxad.extras.managers.InventorySessionManager;
 import net.eloxad.extras.utils.InventorySession;
 import org.bukkit.Bukkit;
@@ -16,6 +17,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitScheduler;
 
 public class PlayerInventoryChangeListener implements Listener {
@@ -76,6 +78,12 @@ public class PlayerInventoryChangeListener implements Listener {
         if (session != null) {
             Bukkit.getScheduler().runTask(Extras.getInstance(), session::syncTargetToGUI);
         }
+        ItemStack item = event.getItem();
+        if(!CustomItemManager.getInstance().getOption(item, "enchanting")) {
+            player.sendMessage("Das Item kann nicht verzaubert werden!");
+            event.setCancelled(true);
+        }
+
     }
 
     @EventHandler

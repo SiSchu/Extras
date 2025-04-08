@@ -8,6 +8,7 @@ import lombok.Generated;
 import lombok.Getter;
 import net.eloxad.extras.utils.CustomGUIHolder;
 import net.eloxad.extras.utils.CustomItem;
+import net.eloxad.extras.utils.PDCHandler;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 
@@ -43,7 +44,17 @@ public class CustomItemManager {
                 break;
             }
         }
-
     }
+
+    public boolean getOption(ItemStack item, String option) {
+        if (!item.hasItemMeta()) return true;
+        String id = (String) PDCHandler.get(item.getItemMeta().getPersistentDataContainer(), "custom_item_id");
+        CustomItem customItem = getItem(id);
+        if (customItem != null) {
+            return customItem.getOption(id, option);
+        }
+        else return true;
+    }
+
 
 }

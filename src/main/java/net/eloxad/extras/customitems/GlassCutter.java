@@ -27,6 +27,8 @@ public class GlassCutter extends CustomItem {
     public GlassCutter() {
         super("glass_cutter", createItem(), "glass_cutter");
         registerEvent(BlockDamageEvent.class, this::onBlockDamage);
+        disableRenaming();
+
     }
 
     public static ItemStack createItem() {

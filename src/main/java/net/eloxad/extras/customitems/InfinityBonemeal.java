@@ -19,6 +19,8 @@ public class InfinityBonemeal extends CustomItem {
     public InfinityBonemeal() {
         super("infinity_bonemeal", createItem(), "Infinity Bonemeal");
         this.registerEvent(PlayerInteractEvent.class, this::onPlayerUseBonemeal);
+        disableRenaming();
+        disableCraftingUsage();
     }
 
     private static ItemStack createItem() {

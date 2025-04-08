@@ -17,6 +17,7 @@ public class InfinityCookie extends CustomItem {
     public InfinityCookie() {
         super("infinity_cookie", createItem(), "Infinity Cookie");
         this.registerEvent(PlayerItemConsumeEvent.class, this::onPlayerItemConsume);
+        disableRenaming();
     }
 
     private static ItemStack createItem() {

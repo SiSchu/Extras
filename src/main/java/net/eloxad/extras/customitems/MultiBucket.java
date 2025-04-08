@@ -33,6 +33,7 @@ public class MultiBucket extends CustomItem {
         this.registerEvent(PlayerInteractEvent.class, this::onPlayerInteract);
         this.registerEvent(PlayerBucketEmptyEvent.class, this::onPlayerBucketEmpty);
         this.registerEvent(PlayerBucketFillEvent.class, this::onPlayerBucketFill);
+        disableRenaming();
     }
 
     private static ItemStack createItem() {

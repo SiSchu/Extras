@@ -6,6 +6,7 @@ import java.util.UUID;
 import net.eloxad.extras.Extras;
 import net.eloxad.extras.managers.InventorySessionManager;
 import net.eloxad.extras.utils.CustomGUIHolder;
+import net.eloxad.extras.utils.CustomItemModify;
 import net.eloxad.extras.utils.InventorySession;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -21,10 +22,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.*;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -35,6 +33,7 @@ public class InventoryListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
+        if(event.getClickedInventory() instanceof AnvilInventory) CustomItemModify.onAnvilClick(event);
         Player player = (Player) event.getWhoClicked();
         Inventory clickedInventory = event.getClickedInventory();
         if (clickedInventory != null) {

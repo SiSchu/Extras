@@ -17,6 +17,7 @@ public class InfinityBeef extends CustomItem {
     public InfinityBeef() {
         super("infinity_beef", createItem(), "Infinity Beef");
         this.registerEvent(PlayerItemConsumeEvent.class, this::onPlayerItemConsume);
+        disableRenaming();
     }
 
     private static ItemStack createItem() {

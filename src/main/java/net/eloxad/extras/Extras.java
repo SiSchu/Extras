@@ -2,8 +2,6 @@ package net.eloxad.extras;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
-import lombok.Generated;
 import lombok.Getter;
 import net.eloxad.extras.guice.ExtrasModule;
 import net.eloxad.extras.register.RegisterCommands;
@@ -18,9 +16,6 @@ public final class Extras extends JavaPlugin {
     private static final String namespace = "extras";
     @Getter
     private static Injector injector;
-
-    public Extras() {
-    }
 
     public void onEnable() {
         instance = this;

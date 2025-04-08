@@ -13,6 +13,8 @@ import org.bukkit.persistence.PersistentDataContainer;
 public class RainbowArmorChestplate extends CustomItem {
     public RainbowArmorChestplate() {
         super("rainbow_chestplate", createItem(), "Regenbogen Brustplatte");
+        disableRenaming();
+        disableCraftingUsage();
     }
 
     public static ItemStack createItem() {

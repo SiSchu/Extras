@@ -13,6 +13,8 @@ import org.bukkit.persistence.PersistentDataContainer;
 public class RainbowArmorBoots extends CustomItem {
     public RainbowArmorBoots() {
         super("rainbow_boots", createItem(), "Regenbogen Schuhe");
+        disableRenaming();
+        disableCraftingUsage();
     }
 
     public static ItemStack createItem() {
