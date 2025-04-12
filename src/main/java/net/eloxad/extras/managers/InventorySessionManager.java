@@ -7,14 +7,12 @@ import net.eloxad.extras.utils.InventorySession;
 import org.bukkit.OfflinePlayer;
 
 public class InventorySessionManager {
-    private static final Map<UUID, InventorySession> sessions = new HashMap();
+    private static final Map<UUID, InventorySession> sessions = new HashMap<>();
 
-    public InventorySessionManager() {
-    }
 
     public static InventorySession getOrCreateSession(OfflinePlayer target) {
         UUID targetId = target.getUniqueId();
-        InventorySession session = (InventorySession)sessions.get(targetId);
+        InventorySession session = sessions.get(targetId);
         if (session == null) {
             session = new InventorySession(target);
             sessions.put(targetId, session);
@@ -24,7 +22,7 @@ public class InventorySessionManager {
     }
 
     public static InventorySession getSession(UUID targetId) {
-        return (InventorySession)sessions.get(targetId);
+        return sessions.get(targetId);
     }
 
     public static void removeSession(UUID targetId) {

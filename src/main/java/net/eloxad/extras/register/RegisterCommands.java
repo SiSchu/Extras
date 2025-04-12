@@ -3,6 +3,7 @@ package net.eloxad.extras.register;
 import com.google.inject.Injector;
 import net.eloxad.extras.commands.GiveCustomItem;
 import net.eloxad.extras.commands.InvSeeCommand;
+import net.eloxad.extras.commands.RecipeCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class RegisterCommands {
@@ -10,5 +11,6 @@ public class RegisterCommands {
         plugin.getCommand("invsee").setExecutor(injector.getInstance(InvSeeCommand.class));
         plugin.getCommand("givecustomitem").setExecutor(injector.getInstance(GiveCustomItem.class));
         plugin.getCommand("givecustomitem").setTabCompleter(injector.getInstance(GiveCustomItem.class));
+        plugin.getCommand("openrecipegui").setExecutor(injector.getInstance(RecipeCommand.class));
     }
 }

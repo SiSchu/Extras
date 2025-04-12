@@ -5,8 +5,10 @@ import com.google.inject.Injector;
 import lombok.Getter;
 import net.eloxad.extras.guice.ExtrasModule;
 import net.eloxad.extras.register.RegisterCommands;
+import net.eloxad.extras.register.RegisterCustomGUIs;
 import net.eloxad.extras.register.RegisterCustomItems;
 import net.eloxad.extras.register.RegisterListeners;
+import net.eloxad.extras.utils.GlowingBlocks;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Extras extends JavaPlugin {
@@ -24,6 +26,8 @@ public final class Extras extends JavaPlugin {
         RegisterCommands.register(this, injector);
         RegisterCustomItems registerCustomItems = injector.getInstance(RegisterCustomItems.class);
         registerCustomItems.register(injector);
+        RegisterCustomGUIs.register(this, injector);
+        GlowingBlocks.onServerStart(this);
     }
 
     public void onDisable() {

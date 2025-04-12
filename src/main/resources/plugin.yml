@@ -13,6 +13,8 @@ commands:
   givecustomitem:
     description: GiveCustomItem
     usage: /givecustomitem <player> <item>
+  openrecipegui:
+    description: test
 permissions:
   extras.invsee:
     description: InvSee

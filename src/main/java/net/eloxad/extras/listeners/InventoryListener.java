@@ -3,7 +3,9 @@ package net.eloxad.extras.listeners;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.google.inject.Inject;
 import net.eloxad.extras.Extras;
+import net.eloxad.extras.managers.CustomGUIManager;
 import net.eloxad.extras.managers.InventorySessionManager;
 import net.eloxad.extras.utils.CustomGUIHolder;
 import net.eloxad.extras.utils.CustomItemModify;
@@ -28,12 +30,13 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitScheduler;
 
 public class InventoryListener implements Listener {
-    public InventoryListener() {
-    }
 
+    @Inject
+    private CustomGUIManager customGUIManager;
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if(event.getClickedInventory() instanceof AnvilInventory) CustomItemModify.onAnvilClick(event);
+        customGUIManager.handleClick(event);
         Player player = (Player) event.getWhoClicked();
         Inventory clickedInventory = event.getClickedInventory();
         if (clickedInventory != null) {
@@ -43,15 +46,14 @@ public class InventoryListener implements Listener {
             if (clickedItem != null && clickedItem.getItemMeta() != null) {
                 PersistentDataContainer dataContainer = clickedItem.getItemMeta().getPersistentDataContainer();
                 NamespacedKey namespace = new NamespacedKey(Extras.getNamespace(), "inventory_sync_barrier");
-                String syncBarrier = (String) dataContainer.get(namespace, PersistentDataType.STRING);
-                if (clickedItem.getType() == Material.BARRIER && syncBarrier == "inventory_sync_barrier") {
+                String syncBarrier = dataContainer.get(namespace, PersistentDataType.STRING);
+                if (clickedItem.getType() == Material.BARRIER && syncBarrier != null && syncBarrier.equals("inventory_sync_barrier")) {
                     event.setCancelled(true);
                     return;
                 }
             }
 
-            if (topHolder instanceof CustomGUIHolder) {
-                CustomGUIHolder customHolder = (CustomGUIHolder) topHolder;
+            if (topHolder instanceof CustomGUIHolder customHolder) {
                 if (customHolder.getId().startsWith("player_inventory_")) {
                     UUID targetId;
                     try {

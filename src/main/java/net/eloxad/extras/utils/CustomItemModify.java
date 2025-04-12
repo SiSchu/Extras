@@ -3,16 +3,14 @@ package net.eloxad.extras.utils;
 import net.eloxad.extras.Extras;
 import net.eloxad.extras.managers.CustomItemManager;
 import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Crafter;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.block.CrafterCraftEvent;
+import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.AnvilInventory;
@@ -102,4 +100,13 @@ public class CustomItemModify {
         }
         return false;
     }
+
+    public static void handleEnchanting(EnchantItemEvent event) {
+        ItemStack item = event.getItem();
+        if (!CustomItemManager.getInstance().getOption(item, "enchanting")) {
+            event.getViewers().forEach(p -> p.sendRichMessage("<red>Das Item kann nicht verzaubert werden!"));
+            event.setCancelled(true);
+        }
+    }
+
 }

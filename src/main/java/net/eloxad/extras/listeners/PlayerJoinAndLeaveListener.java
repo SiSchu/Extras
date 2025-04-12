@@ -23,12 +23,14 @@ public class PlayerJoinAndLeaveListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         Bukkit.getScheduler().runTaskTimerAsynchronously(Extras.getInstance(), () -> {
-            if(player.activeBossBars().iterator().hasNext()) {
-                player.activeBossBars().forEach(player::hideBossBar);
+            if(player.isOnline() && player != null) {
+                if (player.activeBossBars().iterator().hasNext()) {
+                    player.activeBossBars().forEach(player::hideBossBar);
+                }
+                Double avgTickTime = player.getServer().getAverageTickTime();
+                BossBar bossBar = BossBar.bossBar(Component.text(String.format("%.2f", avgTickTime) + " mspt"), 1.0f, BossBar.Color.GREEN, BossBar.Overlay.NOTCHED_20);
+                player.showBossBar(bossBar);
             }
-            Double avgTickTime = player.getServer().getAverageTickTime();
-            BossBar bossBar = BossBar.bossBar(Component.text( String.format("%.2f", avgTickTime) + " mspt"), 1.0f, BossBar.Color.GREEN, BossBar.Overlay.NOTCHED_20);
-            event.getPlayer().showBossBar(bossBar);
         }, 0L, 5L);
     }
 

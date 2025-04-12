@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id 'com.gradleup.shadow' version '9.0.0-beta12'
 }
 
 group = 'net.eloxad'
@@ -53,4 +53,16 @@ processResources {
     filesMatching('plugin.yml') {
         expand props
     }
+}
+
+
+shadowJar {
+    mergeServiceFiles() // optional: if you're using services like SLF4J, etc.
+
+    // Fix for the duplicate META-INF files issue
+    exclude("META-INF/LICENSE", "META-INF/LICENSE.txt", "META-INF/NOTICE", "META-INF/DEPENDENCIES", "META-INF/*.kotlin_module", "META-INF/sisu/**")
+
+    // Optional: if you want a cleaner jar
+    minimize()
+
 }
